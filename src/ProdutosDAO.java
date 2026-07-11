@@ -42,6 +42,23 @@ public class ProdutosDAO {
     } 
     }
     
+    public void venderProduto(int id){
+        String sql = "update produtos set status = ? where id = ?";
+        conn = new conectaDAO().connectDB();
+        
+        try {
+            prep = conn.prepareStatement(sql);
+            
+            prep.setString(1, "Vendido");
+            prep.setInt(2, id);
+            
+            prep.executeUpdate();
+            
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao vender produto: " + e.getMessage());
+        }
+    }
+    
     public ArrayList<ProdutosDTO> listarProdutos(){
     
     String sql = "SELECT * FROM produtos";
